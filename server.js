@@ -14,13 +14,18 @@ const siteBookingRoutes = require("./routes/siteBookingRoutes");
 const receiptRoutes = require("./routes/receiptRoutes");
 const superAdminRoutes = require("./routes/SuperadminRoutes");
 
-
 const app = express();
 connectDB();
 
 app.use(
   cors({
-  origin: ["https://navanagara-project-2.onrender.com", "https://www.navanagarahousebuildingsociety.com","https://navanagarahousebuildingsociety.com","http://3.104.54.57","http://navangara.s3-website-ap-southeast-2.amazonaws.com" ],
+    origin: [
+      "https://navanagara-project-2.onrender.com",
+      "https://www.navanagarahousebuildingsociety.com",
+      "https://navanagarahousebuildingsociety.com",
+      "http://3.104.54.57",
+      "http://navanagarahousebuildingsociety.com.s3-website-ap-southeast-2.amazonaws.com",
+    ],
     // origin: ["http://localhost:3000", "http://localhost:3000"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
