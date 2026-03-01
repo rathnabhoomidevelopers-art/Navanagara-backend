@@ -21,9 +21,7 @@ app.use(
   cors({
     origin: [
       "https://navanagara-project-2.onrender.com",
-      "https://www.navanagarahousebuildingsociety.com",
       "https://navanagarahousebuildingsociety.com",
-      "http://navanagarahousebuildingsociety.com.s3-website-ap-southeast-2.amazonaws.com",
     ],
     // origin: ["http://localhost:3000", "http://localhost:3000"],
     credentials: true,
