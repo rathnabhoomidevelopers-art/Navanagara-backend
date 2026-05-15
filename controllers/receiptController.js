@@ -271,30 +271,30 @@ Navanagara Admin System`;
 
         const emailPromises = [];
 
-        // 1. Send to CUSTOMER email (from form)
-        if (userEmail && userEmail.trim()) {
-          console.log(`📧 Sending to customer: ${userEmail}`);
-          emailPromises.push(
-            sendMail(
-              userEmail.trim(),
-              `Payment Receipt - ${receipt_no}`,
-              customerMessage,
-              pdfBase64,
-              pdfFilename,
-            )
-              .then(() =>
-                console.log(`✅ Email sent to customer: ${userEmail}`),
-              )
-              .catch((error) =>
-                console.error(
-                  `⚠️ Failed to send to customer ${userEmail}:`,
-                  error.message,
-                ),
-              ),
-          );
-        } else {
-          console.log(`⚠️ No customer email provided`);
-        }
+        // 1. Send to CUSTOMER email (from form) — TEMPORARILY DISABLED
+        // if (userEmail && userEmail.trim()) {
+        //   console.log(`📧 Sending to customer: ${userEmail}`);
+        //   emailPromises.push(
+        //     sendMail(
+        //       userEmail.trim(),
+        //       `Payment Receipt - ${receipt_no}`,
+        //       customerMessage,
+        //       pdfBase64,
+        //       pdfFilename,
+        //     )
+        //       .then(() =>
+        //         console.log(`✅ Email sent to customer: ${userEmail}`),
+        //       )
+        //       .catch((error) =>
+        //         console.error(
+        //           `⚠️ Failed to send to customer ${userEmail}:`,
+        //           error.message,
+        //         ),
+        //       ),
+        //   );
+        // } else {
+        //   console.log(`⚠️ No customer email provided`);
+        // }
 
         // 2. Send to COMPANY email (from .env)
         const companyEmail = process.env.COMPANY_EMAIL;
