@@ -17,15 +17,33 @@ const superAdminRoutes = require("./routes/SuperadminRoutes");
 const app = express();
 connectDB();
 
+// Allowed origins: CORS_ORIGINS env (comma-separated) + known defaults
+const allowedOrigins = [
+  "https://navanagarahousebuildingsociety.com",
+  "https://www.navanagarahousebuildingsociety.com",
+  "http://localhost:3000",
+  ...(process.env.CORS_ORIGINS || "")
+    .split(",")
+    .map((o) => o.trim())
+    .filter(Boolean),
+];
+
 app.use(
   cors({
-    origin: [
-      "https://navanagara-project-2.onrender.com",
-      "https://navanagarahousebuildingsociety.com",
-    ],
-    // origin: ["http://localhost:3000", "http://localhost:3000"],
+    origin: (origin, callback) => {
+      // Allow non-browser requests (Postman, curl, server-to-server)
+      if (!origin) return callback(null, true);
+      if (
+        allowedOrigins.includes(origin) ||
+        /\.vercel\.app$/.test(origin) // Vercel preview deployments
+      ) {
+        return callback(null, true);
+      }
+      console.warn(`❌ CORS blocked: ${origin}`);
+      return callback(new Error(`Origin ${origin} not allowed by CORS`));
+    },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
@@ -85,6 +103,6 @@ app.listen(PORT, () => {
     `📧 Company Email: ${process.env.COMPANY_EMAIL || "❌ NOT CONFIGURED"}`,
   );
   console.log(
-    `💾 Database: ${process.env.MONGODB_URI ? "Connected" : "Check connection"}`,
+    `💾 Database: ${process.env.MONGODB_URI ? "URI configured" : "❌ MONGODB_URI NOT SET"}`,
   );
 });
