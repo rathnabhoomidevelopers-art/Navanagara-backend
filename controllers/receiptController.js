@@ -8,6 +8,7 @@ const cloudinary = require("../cloudinaryConfig");
 const PROJECT_CODES = {
   "New City": "NCG",
   "New City 1": "NCS",
+  "New City North": "NCL",
 };
 
 // Generate a unique receipt number scoped to a specific project prefix
